@@ -45,7 +45,10 @@ router.post(
 
 router.put(
     '/:id', [
-
+        validarJWT,
+        check('nombre', 'El nombre del Médico es necesario').not().isEmpty(),
+        check('hospital', 'El Hospital id debe ser válido').isMongoId(),
+        validarCampos,
     ],
     actualizarMedico
 );
@@ -56,8 +59,10 @@ router.put(
  ******************************************************
  */
 
+
 router.delete(
     '/:id',
+    validarJWT,
     borrarMedico
 );
 
